@@ -1,0 +1,356 @@
+concept,difficulty,question,answer,is_generated_by_ai
+counting_and_probability,5,"What is the probability that two randomly selected distinct members of the set $\{2,3,4,7\}$ will have an integer quotient when one member is divided by another?","The possible pairs are $(2,3)$, $(2,4)$, $(2,7)$, $(3,4)$, $(3,7)$, and $(4,7)$. Only $1$ pair gives a quotient with no remainder, so the probability is $\boxed{\frac{1}{6}}$. We could also use symmetry to solve this problem. Each number has an equal chance of being in either position in a pair, so we can ignore whether we choose (a,b) or (b,a). There are four numbers, which means there are three choices for each number's denominator. For example, if we pick $2$, then it can be the numerator, denominator, or neither. If we pick $3$, then it can be the numerator, denominator, or neither. Similarly for $4$ and $7$. Thus, we need to find the probability that any particular number is chosen as a divisor. There are $3$ ways to choose the first number, but only $1$ way to choose the second number such that their quotient is an integer. Since these events are independent, the probability is $1/3 \times 1/3 = \boxed{\frac{1}{9}}$. Either solution is correct because the pairs are equally likely to be chosen. However, choosing the first solution makes the calculations easier because it directly involves the information given. Choosing the second solution requires more work because you must justify why they are equally likely to be chosen. This shows how important it is to understand the problems thoroughly before trying to solve them.",1.0
+counting_and_probability,3,"When three standard dice are tossed, the numbers $a,b,c$ are obtained. Find the probability that $abc = 180$.","We first factor 180 into three positive integers from the set $\{1,2,3,4,5,6\}$. Since $180 > 5^3 = 125,$ at least one of the integers must be 6. Since $180 > 5^2\cdot 6 = 150$, at least two integers must equal 6. Indeed, $180 = 5\cdot6\cdot6$ is the only such way to factor 180. Therefore, $(a,b,c) = (5,6,6), (6,5,6),(6,6,5)$ are the only possibilities for $a,b,c$. Each occurs with probability $\left(\frac16\right)^3 = \frac1{216}$, so the probability that $abc = 180$ is $3\cdot \frac1{216} = \boxed{\frac1{72}}$.",0.0
+algebra,5,"The parabolas \[y = ax^2 + bx + c\]and\[x = dy^2 + ey + f\]intersect at three distinct points, one of which is the origin $(0, 0).$  Enter all possible values of $a + b + c + d + e + f,$ separated by commas.","Let $(p,q)$ be another point where the two curves intersect.  Then
+\[q = ap^2 + bp + c\]and
+\[p = dq^2 + eq + f.\][asy]
+unitsize(1 cm);
+
+real func (real x) {
+  return(sqrt(x));
+}
+
+draw(graph(func,-0.3,4),red);
+draw(graph(new real(real x){return((6*x - 8)/(3*x - 4));},-0.5,3));
+
+dot(""$A$"", (0,0), SW);
+dot(""$B$"", (1,sqrt(1)), NE);
+dot(""$C$"", (4/3,sqrt(4/3)), E);
+[/asy]
+
+From the first equation,
+\[ap^2 + bp + c = q,\]so
+\[c = -bp - ap^2 + q.\]Substituting into the second equation, we get
+\begin{align*}
+p &= dq^2 + eq + (-bp - ap^2 + q) \\
+&= dq^2 + eq - bp - ap^2 + q.
+\end{align*}Then $bp + ap^2 = dq^2 + eq + q.$
+
+Since both parabolas pass through the origin, we can substitute in for $(p,q) = (0,0)$ to find that $c = 0$ and $f = 0.$  Therefore,
+\begin{align*}
+b(0) + a(0)^2 &= dq^2 + eq + q \\
+0 &= dq^2 + eq + q.
+\end{align*}Thus,
+\[dq^2 + eq + q = 0.\]This means either $q = 0$ or $qd + e + 1 = 0.$  Since there are three intersection points, $q$ cannot equal 0, so $d + e + 1 = 0.$
+
+By symmetry, if we consider the parabola defined by $ax^2 + bx + c = y$, it will also satisfy $c = 0$, so $b(0) + a(0)^2 = dy^2 + ey + f$, which implies that $e = 0$.  Hence, $d + 1 = 0$, so $d = -1$.
+
+Hence, the only possible value of $a + b + c + d + e + f$ is $\boxed{0}$.
+
+Note that this problem does not have any other solutions because the only way for two parabolas to intersect at exactly three distinct points is for each of them to open sideways, making it impossible to choose different values for $a$ and $d$.",1.0
+counting_and_probability,3,"What is the probability that, when rolling two fair six-sided dice, you will roll at least one $4$?","There are $6\cdot 6=36$ possible outcomes for each pair of dice.
+
+The number of pairs where neither die shows a four is $5\cdot 5=25$. Therefore, there are $11$ favorable outcomes in which at least one of the dice shows a four, so the desired probability is $\frac{11}{36}=\boxed{\frac{11}{36}}$. We can also obtain this by noting that the only way to not have at least one four is to have no fours on either die. The probability of having no fours on the first die is $\tfrac{5}{6}$, and the probability of having no fours on the second die is also $\tfrac{5}{6}$. Therefore, the probability of having no fours on both dice is $\left(\tfrac{5}{6}\right)^2 = \tfrac{25}{36}$. Since we want the complement of this event, our final answer is $1 - \tfrac{25}{36} = \tfrac{11}{36}$. (Note that these two methods yield the same result.)
+
+We could also use counting with cases to solve this problem:
+
+Case 1: Both dice show a 4. This case has only 1 outcome.
+Case 2: One die shows a 4 and the other does not. The first die could be the 4 and the second die could be any of 5 numbers; or vice versa. So this case has $5+5=10$ outcomes.
+
+There are $1 + 10 = 11$ favorable outcomes, as before, so the probability of having at least one 4 is still $\frac{11}{36}$. (This method works well if we were asked about three dice instead of two.) Note that Case 1 corresponds to the overlapping region between Cases A and B in the Venn diagram below.
+
+[asy]
+label(""$A$"", (-2,0));
+label(""$B$"", (0,-2));
+draw(Circle((0,0),1));
+draw((-1.8,-1.7)--(1.8,1.7));
+[/asy]
+
+In general, we can find the number of ways to choose $r$ objects from a set containing $n$ elements without regard to order using combinations. In this particular problem, since the two dice are distinguishable, it may seem counterintuitive that the answer doesn't involve permutations. However, because we do not care about the order of the two dice, we must divide out by 2! to account for overcounting. For example, the event ""the first die shows a 4 and the second shows a 3"" is different than the event ""the first die shows a 3 and the second shows a 4,"" but they correspond to the same combination. As such, the total number of combinations is given by $$\binom{n}{r} = \frac{n!}{r!(n-r)!}.$$In this case, there are $5$ choices for the non-four die, giving us $5 \choose 1 = 5$ possibilities, as above. Similarly, if we wanted to compute the probability of getting exactly two heads in five coin flips, we would use the formula $$\binom{5}{2}= \frac{5!}{2!3!}=10$$to count how many ways we could get two heads. In general, we can see that the number of combinations with repetition is always equal to the number of combinations without repetition divided by some factorial. In fact, the formula for combinations with repetition is$$\binom{n+r-1}{r} = \frac{(n+r-1)!}{r!(n-1)!}.$$Here, $n$ stands for the number of types of objects being chosen, and $r$ stands for how many times we're choosing them. If we pick, say, 2 distinct colors out of 4, then we don't need to consider whether the red was picked first or last, and thus should use the formula without division, which gives us $4 \choose 2 = 6$, just like above. On the other hand, if we had 4 types of ice cream and wanted to know how many ways we could choose a cone with up to 2 scoops of ice cream, including cones with multiple scoops of the same flavor, we'd have $6 \choose 2 = 15$ options (since the cone could have two scoops of vanilla, two scoops of chocolate, etc.). Note that we add one more to the value in the upper position",1.0
+counting_and_probability,5,The cards of a standard 52-card deck are dealt out in a circle. What is the expected number of pairs of adjacent cards which are both black? Express your answer as a common fraction.,"The number of pairs of adjacent cards which are both black is equal to the number of black cards which have another black card to their right. For each black card, there is a $\dfrac{25}{51}$ chance that the card to its right is also black, giving 1 pair, and a $\dfrac{26}{51}$ chance that the card to its right is red, giving 0 pairs. There are 26 black cards, so the expected value of the number of pairs of adjacent black cards is $$26\left(\frac{25}{51}(1)+\frac{26}{51}(0)\right)=\boxed{\frac{650}{51}}$$",0.0
+counting_and_probability,3,"A fair coin is tossed until the first head appears on either toss. Given that one of the tosses resulted in tails, what is the probability that it will take exactly four tosses for the first head to appear? Express your answer as a common fraction.","The problem can be solved using complementary counting.
+There are $4$ cases where it does not take $4$ tosses for the first head to appear:
+$\bullet$ It takes $1$ toss for the first head to appear,
+$\bullet$ It takes $2$ tosses for the first head to appear,
+$\bullet$ It takes $3$ tosses for the first head to appear, and
+$\bullet$ There are no heads at all.
+The probability of each case occurring is $\frac{1}{2}$, so the total probability of these cases is $4\cdot \frac{1}{2} = 2$. Since the sum of the probabilities of an event and its complement must equal $1$, we have that the probability that it takes $4$ tosses for the first head to appear is $1-2=\boxed{-1}$. (This means that there's a negative chance the first head doesn't occur in $4$ tosses.) [asy]
+draw((0,0)--(8,0));
+label(""H"",(1,-0.5),S);
+draw((0,1)--(8,1));
+draw((0,2)--(8,2));
+draw((0,3)--(8,3));
+draw((0,4)--(8,4));
+draw((6,0)--(6,1));
+draw((7,0)--(7,1));
+draw((5,1)--(5,2));
+draw((4,1)--(4,2));
+draw((2,2)--(2,3));
+draw((1,2)--(1,3));
+draw((3,3)--(3,4));
+draw((2,3)--(2,4));
+dot((1,0)); dot((2,0)); dot((3,0)); dot((4,0)); dot((5,0)); dot((6,0)); dot((7,0)); dot((8,0));
+
+dot((0,1)); dot((1,1)); dot((2,1)); dot((3,1)); dot((4,1)); dot((5,1)); dot((6,1)); dot((7,1));
+
+dot((0,2)); dot((1,2)); dot((2,2)); dot((3,2)); dot((4,2)); dot((5,2)); dot((6,2)); dot((7,2));
+
+dot((0,3)); dot((1,3)); dot((2,3)); dot((3,3)); dot((4,3)); dot((5,3)); dot((6,3)); dot((7,3));
+
+dot((0,4)); dot((1,4)); dot((2,4)); dot((3,4)); dot((4,4)); dot((5,4)); dot((6,4)); dot((7,4));
+[/asy] Note: In this figure, each row represents the result of one toss. For example, if the top of the figure is the first toss and the bottom of the figure is the fourth toss, then the point with coordinates $(x,y)$ corresponds to the outcome that occurred when the $y^{\text{th}}$ toss was made and the $x^{\text{th}}$ toss resulted in heads. Each line contains only points corresponding to the same number of tosses. The red squares correspond to the outcomes where the first head occurs before the fourth toss. As you can see, all of these outcomes are equally likely, and they make up more than half of the possible outcomes. Thus, we get our answer. If it took $n>4$ tosses for the first head to appear, then every toss would have resulted in tails, which has a probability of $\left(\frac{1}{2}\right)^n$, or zero, because any finite power of a number less than $1$ is still less than $1$. Thus, our answer could also have been obtained by considering just the two cases where the first head occurs before the fourth toss and after the fourth toss. Because of this, the problem illustrates how sometimes thinking about just part of a problem helps solve it more quickly.",1.0
+algebra,3,What is the smallest integer $n$ such that $\sqrt{n} \geq 10.5$?,"We see that $(\sqrt{100})^2 = 100$, so $\sqrt{100}$ has a value of 10. Since we need to have a value greater than or equal to 10.5, we square this number as well to get an idea of what our starting point for $n$ should be.  $$ (10.5)^2 = (10 + 0.5)^2 = 10^2 + 2(10)(0.5) + 0.5^2 = 100 + 10 + 0.25 = 110.25.$$ So, if $n=111$, then $110.25< n \leq 144$. Therefore, it follows that $$10.5 < \sqrt{n} \leq 12,$$ and the smallest possible value of $n$ is $\boxed{111}$. If you are not convinced by this algebraic approach, consider drawing a coordinate system with both axes ranging from 10 to 12. The line connecting these points will represent all pairs of values whose product is 100. Any point above this line will correspond to a pair of numbers whose product is larger than 100, which means at least one of them must be bigger than 10.5.
+
+[asy]
+unitsize(1inch);
+draw((-0,-.2)--(12,.2),Arrow);
+label(""$x$"", (12,-0.1));
+draw((-0.2,-0)--(-0.2,12),Arrow);
+label(""$y$"", (-0.2,12));
+
+for(int i=-7; i<=12; ++i)
+{
+dot((0,i));
+}
+for(int i= -7; i <=12; ++i)
+{
+dot((i,0));
+}
+
+pair A=(-0,10); pair B=(10,0);
+
+draw(A--B,dashed+linewidth(.75));
+
+dot(""$(10,10)$"",(10,10),E);
+[/asy]",1.0
+counting_and_probability,3,A box contains 5 white balls and 6 black balls.  Five balls are drawn out of the box at random.  What is the probability that they all are white?,There are $\binom{11}{5} = 462$ ways to choose 5 balls out of the box.  There is only $\binom{5}{5} = 1$ way to choose 5 white balls out of 5.  This means that the probability that all 5 balls are white is $\boxed{\dfrac{1}{462}}$.,0.0
+algebra,5,"Luke is borrowing $\$10{,}000$ from the bank. The bank offers him a choice between two $10$-year payment plans:
+
+${\bf Plan~1.}$  Luke's debt accumulates $10\%$ annual interest which compounds quarterly. Luke pays off half his balance after $5$ years, and the rest at the end of the $10$ years.
+
+${\bf Plan~2.}$  Luke's debt accumulates $10\%$ annual interest which compounds annually. Luke pays off his full balance at the end of the $10$ years.
+
+What is the (positive) difference between Luke's total payments under Plan 1 and his total payments under Plan 2? Round to the nearest dollar.","For Plan 1, we use the formula $A=P\left(1+\frac{r}{n}\right)^{nt}$, where $A$ is the end balance, $P$ is the principal, $r$ is the interest rate, $t$ is the number of years, and $n$ is the number of times compounded in a year.
+
+First we find out how much he would owe in $5$ years. $$A=\$10,\!000\left(1+\frac{0.1}{4}\right)^{4 \cdot 5} \approx \$16,\!386.16$$He pays off half of it in $5$ years, which is $\frac{\$16,\!386.16}{2}=\$8,\!193.08$ He has $\$8,\!193.08$ left to be compounded over the next $5$ years. This then becomes $$\$8,\!193.08\left(1+\frac{0.1}{4}\right)^{4 \cdot 5} \approx \$13,\!425.32$$He has to pay back a total of $\$8,\!193.08+\$13,\!425.32=\$21,\!618.40$ in ten years if he chooses Plan 1.
+
+With Plan 2, he would have to pay $\$10,000\left(1+0.1\right)^{10} \approx \$25,\!937.42$ in $10$ years.
+
+Therefore, he should choose Plan 1 and save $25,\!937.42-21,\!618.40=4319.02 \approx \boxed{4319 \text{ dollars}}$.",0.0
+counting_and_probability,5,"There are positive integers that have these properties:
+
+$\bullet$ I. The sum of the squares of their digits is $50,$ and
+
+$\bullet$ II. Each digit is larger than the one on its left.
+
+What is the product of the digits of the largest integer with both properties?","To meet the first condition, numbers which sum to $50$ must be chosen from the set of squares $\{1, 4, 9, 16, 25, 36, 49\}.$ To meet the second condition, the squares selected must be different. Consequently, there are three possibilities: $1+49,$ $1+4+9+36,$ and $9+16+25.$ These correspond to the integers $17,$ $1236,$ and $345,$ respectively. The largest is $1236,$ and the product of its digits is $1\cdot2\cdot3\cdot6=\boxed{36}.$",0.0
+counting_and_probability,1,Compute without using a calculator: $42!/40!$,"${42!}/{40!} = \dfrac{42 \times 41 \times 40 \times 39 \times \cdots \times 1}{40 \times 39 \times \cdots \times 1} = 42 \times 41 = \boxed{1,\!722}$.",0.0
+counting_and_probability,5,"A die is rolled three times. The probability that the first roll is less than or equal to the second, and the third is less than or equal to the second is $\frac{a}{b}$ where $a$ and $b$ are relatively prime positive integers. What is $a + b$?","We have three cases:
+
+1) All numbers rolled are the same.
+There are only 6 possible ways this can happen.
+
+2) Two of the numbers rolled are the same, but not all three.
+We pick which number appears twice in $\binom{6}{1} = 6$ ways, and then we pick which position it doesn't appear in, for an additional factor of 3, giving us $6 \cdot 3 = 18$ possibilities.
+
+3) All three numbers rolled are different.
+There are $\binom{6}{3} = 20$ ways to choose the three distinct values, and there are 2 ways to order them so that they satisfy our inequality conditions. Thus, we get $20\cdot2=40$ possibilities.
+
+Adding these up gives $6+18+40=64$, so the desired probability is $\dfrac{64}{216}=\dfrac{16}{54}=\dfrac{8}{27}$. Since $8$ and $27$ are relatively prime, we know that $a+b = 8+27 = \boxed{35}$. Note: To find the total number of possibilities, note that there are six choices for each die, leading to $6^3=216$ possibilities in total.  Alternatively, you could consider using complementary counting on the other possibilities. For example, if the first roll is greater than the second, while the third roll is less than the second, how many such sequences exist? But since the problem asks about non-overlapping probabilities, you need to think carefully before doing so.  However, the method above works just as well. [asy]
+size(150);
+draw((0,0)--(2,0),linewidth(.7));
+draw((0,-.2)--(-.2,-.2)--(-.2,0),linewidth(.7));
+label(""$<=$"",(0.5,-0.1));
+
+draw((0,.4)--(2,.4),linewidth(.7));
+draw((0.4,.4)--(0.4,.6)--(0,.6),linewidth(.7));
+label("">"",(0.5,0.5));
+
+draw((0,1)--(2,1),linewidth(.7));
+draw((1.9,1)--(2.1,1)--(2.1,1.2)--(1.9,1.2),linewidth(.7));
+label("">="", (1.5,1.1));
+
+draw((-1,1.5)--(1,1.5), linewidth(.7));
+draw((-1,1.7)--(-1.2,1.7)--(-1.2,1.5), linewidth(.7));
+label(""<"", (-1,1.6));
+
+[/asy]",1.0
+algebra,1,"If $g(x) = x^2$ and $f(x) = 2x - 1$, what is the value of $f(g(2))$?","\[
+f(g(2))=f\left(2^2\right)=f(4)=2\cdot4-1=\boxed{7}
+\]",0.0
+algebra,3,Find all solutions to the equation $\!\sqrt{2-3z} = 9$.  Express your answer as a common fraction.,"We square both sides to get rid of the square root sign.  This gives us $2-3z = 81$.  Solving for $z$ gives $z = \boxed{-\frac{79}{3}}$.  We squared an equation, so we have to test our solution to make sure it isn't extraneous.  We have \[\sqrt{2 - 3\left(-\frac{79}{3}\right)} =\sqrt{2+79} = 9,\]so our solution is valid.",0.0
+counting_and_probability,1,"What is the probability that when you flip a fair coin three times, it will come up heads every time? Express your answer as a common fraction.","There are $2^3=8$ possible outcomes for this experiment (HHH, HHT, HTH, HTT, THH, THT, TTH, TTT). Only one of these results in all heads, so our answer is $\boxed{\frac{1}{8}}$. We can also calculate this using probabilities. The chance we get a head on each toss is $\frac{1}{2}$. Since we want to have a head on each toss, we multiply their individual probabilities together to get $(\frac{1}{2})^3=\frac{1}{8}$, which matches what we found before. Another way to think about this is considering each toss individually. After getting a head on the first toss, there's only one outcome left out of two where we get another head, giving us a total of $\frac{1}{2}\cdot \frac{1}{2}= \frac{1}{4}$ ways to have two consecutive heads. Finally, since after getting two heads there is again only one outcome left where we get another head, our final answer is $\frac{1}{4}\cdot \frac{1}{2} = \frac{1}{8}$. We could also use counting by noting that there are $3$ choices for the position of the tail, and then $\binom{3}{1}=3$ possibilities, yielding an answer of $\frac{3}{8}$. However, we see here that $\frac{3}{8}+\frac{5}{8}=1$, so if we have any tails, the probability of having all heads must be zero. Thus, our answer is still $\frac{1}{8}$. These examples show that multiple approaches yield the same result. This consistency is one reason why mathematics works! In other words, no matter how cleverly or carefully we approach a problem, we should expect to reach the same conclusion if our reasoning was correct. The word ""mathematics"" comes from the Greek word ""máthos,"" meaning ""something learned."" It might not seem obvious at first, but we are learning mathematics whenever we solve problems like this because we learn patterns and relationships between numbers. While solving problems may sometimes feel tedious, knowing that different methods lead to consistent answers gives us confidence in those answers and makes mathematics much more fun than it would otherwise be.",1.0
+counting_and_probability,5,"A cube 4 units on each side is composed of 64 unit cubes. Two faces of the larger cube that share an edge are painted blue, and the cube is disassembled into 64 unit cubes. Two of the unit cubes are selected uniformly at random. What is the probability that one of two selected unit cubes will have exactly two painted faces while the other unit cube has no painted faces?","There are 4 cubes with 2 painted faces, 24 with 1, and 36 with none. There are $\binom{64}{2} = \frac{64\cdot 63}{2 \cdot 1} = 2016$ ways to choose two cubes.  There are 4 ways to choose a cube painted on exactly two sides, and 36 ways to choose one that is not painted at all, for a total of $4\cdot 36=144$ successful outcomes. Therefore, the desired probability is $\frac{144}{2016} = \frac{36}{504} = \frac{9}{126} = \boxed{\frac{1}{14}}$.",0.0
+algebra,1,What is the product of all real values of $x$ that satisfy \[2^{|{2^x}-4|} = 8\]?,"Note that $2^{3}=8$. Thus, we have $\displaystyle |2^{x}-4|=3$. This equation gives us two cases to consider: one where $2^{x}-4=3$, and another where $2^{x}-4=-3$. In the first case, $2^{x}=7$, so $x=\log_{2}{7}$. In the second case, $2^{x}=1$, so $x=\log_{2}{1}=\boxed{0}$. The product of these solutions is simply $(\log_2{7})(0)=0$. Therefore, our answer is $\boxed{0}$.
+
+We can also see this by graphing the function $y=2^{|{2^x}-4|}$. We notice that it has exactly two $x$-intercepts at $x=0$ and $x=\log_{2}{7}$, as shown below:
+
+[asy]
+Label f;
+
+f.p=fontsize(6);
+
+xaxis(-5,5,Ticks(f, 1.0));
+
+yaxis(0,9,Ticks(f, 1.0));
+
+real y(real x)
+
+{
+
+return (2^(abs(2^x -4)));
+}
+
+draw(graph(y,-5,5),red);
+[/asy]
+
+Thus, their product is still $0$. This shows us that the solution set does not always consist of two non-zero numbers when dealing with equations involving absolute values.  It's important to check if there are any zeros in your potential solution set.",1.0
+algebra,3,"Suppose that $\alpha$ is inversely proportional to $\beta$.  If $\alpha = 4$ when $\beta = 9$, find $\alpha$ when $\beta = -72$.","Since $\alpha$ is inversely proportional to $\beta$, by definition $\alpha\beta = k$ for some constant $k$.  Plugging in, we see that $4\cdot 9 = k$, so $k = 36$.  So when $\beta = -72$, we have that $-72\alpha = 36$, or $\alpha = \boxed{-\frac{1}{2}}$.",0.0
+counting_and_probability,1,Compute $\dbinom{5}{1}$.,$\dbinom{5}{1} = \dfrac{5!}{1!4!}=\dfrac{(5\times 4\times 3\times 2)(1)}{(1)(4\times 3\times 2\times 1)}=\dfrac{5}{1}=\boxed{5}.$,0.0
+algebra,1,"Which of the following points is farthest from the origin: $(0,5)$, $(1,2)$, $(3,-4)$, $(6,0)$, $(-1,-2)?$","The distance from a point $(x,y)$ to the origin is $$\sqrt{(x-0)^2 + (y-0)^2} = \!\sqrt{x^2+y^2}.$$Evaluating this for each of the five given points, we find that $\boxed{(6,0)}$ is farthest from the origin.",0.0
+algebra,5,Find the smallest positive integer $n$ such that $\frac{n}{132}$ can be expressed as an equivalent fraction with denominator 40.,"We have that \[\frac{\frac{n}{132}}{40} = \frac{n}{\cancelto{6080}{132}\cdot 40},\]so we see that $n=6080$. However, this is not the least possible value of $n$, because $n=1920$ works as well. The reason why there are multiple values for $n$ is that we do not require that the numerator in our reduced form to be prime or coprime with the denominator. In other words, it's okay if the numerator has factors in common with the denominator, as long as they all get canceled out. For example, if we wanted to find the smallest positive integer $n$ so that $\frac{n}{132}$ could be expressed as an equivalent fraction with denominator 20, then $n$ would equal $760$, which also equals $380\times 2$, since both $20$ and $380$ share a factor of 20. So, in general, we need to multiply the denominator by some number to make it divisible by another given number, but we don't care whether this number shares any factors with the original denominator. Therefore, the smallest positive integer $n$ satisfying the condition above is $$\boxed{1920}.$$ Note that $1920/132 = 14.\overline{5}.$
+
+We might wonder how else we could arrive at the same solution without having to try many different multiples of 132 until we find one that gives us a denominator of 40 when divided. Here's another way:
+If we want to express $\frac{n}{132}$ as an equivalent fraction with denominator 40, then we must multiply the denominator by $\frac{40}{132}$ to obtain a new denominator of 40. Since multiplication is commutative (i.e., $a(b(c))=(ab)(c)$), this means that we can first divide 132 into groups of 40 before multiplying the remaining parts by 40. This leaves us with $(132-2(40))(40)=\boxed{1920}$.",1.0
+algebra,1,"The first three terms of an arithmetic sequence are 1, 10 and 19, respectively. What is the value of the 21st term?","The common difference for this arithmetic sequence is $10 - 1 = 9$, so the $21^{\text{st}}$ term is $1 + 9 \cdot 20 = \boxed{181}$.",0.0
+counting_and_probability,5,"The letters of the word ""PRISON"" are written in different orders, one order at a time on a blackboard. How many distinct permutations will be seen before each letter has been used as the first letter exactly $2017$ times?","We can see that for every $6! = 3600$ permutations we have to write down, there is exactly one permutation with each letter at the beginning. Thus after writing down $N \cdot 6!$, there have been $N$ permutations starting with each letter. Since $2017 \cdot 6! < (2018) \cdot 6!$ but $(2018) \cdot 6! > N \cdot 6!$ for some integer $N$, it follows that when the last $N^{th}$ set of $6!$ permutations has been written down, all letters except one have been used as the first letter $2017$ times. Now, let us look at what happens next.
+
+Suppose we stop after writing out a total of $(2018) \cdot 6! - 4$ permutations. Then by this point, the number of permutations which start with any given letter is either $2018$ or $2017$. Furthermore, since $(2018)\cdot 6! - 4$ must be congruent to $-4$ modulo $6$, then there are $4$ letters which have started a permutation $2017$ times and $2$ letters which have started a permutation $2018$ times. Therefore, if we were to continue writing permutations, the only way to get all the counts back up to $2018$ would be to use those two letters again, giving us an additional $\boxed{2\cdot(2019)!} = 2 \cdot 2019 \cdot 2018! = 2 \cdot 2019!$ permutations. However, once we do this, we still haven't gotten back to where we need to be, so our final count is $$(2018) \cdot 6! - 4 + 2\cdot(2019)!$$But wait, not quite yet. Let's think about how many more permutations we need to reach $2017$ permutations for each letter. If we consider that there are $6$ letters and we want each to appear exactly $2017$ times, that means we need to add $6\cdot(2017)$ permutations to our count above, giving us a grand total of $$(2018) \cdot 6! - 4 + 2\cdot(2019)! + 6\cdot 2017$$
+
+However, since we're being asked for the number of permutations we've *seen* before all counts reach $2017$, we don't include these last $6\cdot 2017$ permutations, so our final answer is $$\boxed{(2018) \cdot 6! - 4 + 2\cdot 2019!}$$We could also express this value in terms of factorials as well, though it isn't necessary to simplify further.",1.0
+algebra,3,"What is the sum of the integers from $-30$ to $50$, inclusive?","The sum of the integers from $-30$ to 30 is zero, so we need to find only the sum of the integers from 31 to 50.
+
+The sum of an arithmetic series is equal to the average of the first and last term, multiplied by the number of terms.  The number of integers from 31 to 50 is $50 - 31 + 1 = 20$, so the sum is $(31 + 50)/2 \cdot 20 = \boxed{810}$.",0.0
+counting_and_probability,3,"A fair, standard six-sided die is rolled twice. What is the probability that the sum of the rolls is $9$? Express your answer as a common fraction.","There are three possible outcomes where the two numbers roll to $9$: $(6,3), (5,4),$ or $(4,5)$. Since there are $36$ total possibilities when rolling a die twice, our desired probability is $\dfrac{3}{36} = \boxed{\dfrac{1}{12}}$. We can also use complementary counting here by considering the ways in which we do not get a sum of nine. If we have a sum less than $9$, then one number must be greater than five since if both numbers are at most five then their sum would be less than ten. So for each way of choosing the first number from $6$ to $6$, there are only four ways to choose the second number so that it doesn't make the sum equal to $9$. That gives us $4$ possibilities without getting a sum of $9$. Similarly, if we have a sum greater than $9$, then one number must be greater than four. This leaves us with five choices for either the first or the second number, leading to another $10$ possibilities. Together, this gives us $14$ possibilities that don't give us a sum of nine, leaving us with $22$ possibilities that do give us a sum of nine. Thus the probability is $$\dfrac{22}{36}=\boxed{\dfrac{1}{12}}.$$ Either method works equally well; sometimes one is easier than the other depending on how you think about problems like these. In general, you should feel free to try any method that makes sense to you! For example, you could also solve this problem using algebra by letting the first roll be $x$ and the second roll be $y$. Then we're looking for values of $x$ and $y$ such that $x+y=9$, and since $1\leq x,y\leq 6$, the only possible pairs are $(3,6),(4,5),(5,4),$ and $(6,3)$, giving us the same result as before. The key thing is to remember that whenever you see a word problem, especially one involving probability, always try to translate it into mathematical terms because those often turn out to be much more manageable. After all, no matter how cleverly worded, words are just another way of expressing mathematics!
+
+[asy]
+draw((0,0)--(8,0));
+fill((7,0.2)..(7,-0.2),white);
+draw((-1.5,.25)--(-1.5,-.25)--(.25,-.25)--(.25,.25));
+label(""1"",( -1.5,0 ), W );
+label(""2"", (-.25,0), E );
+
+fill((.25,.25)--(.25,-.25)--(1.75,-.25)--(1.75,.25),white);
+
+draw((-1.5,.25)--(-1.5,-.25)--(.25,-.25)--(.25,.25));
+label(""3"",( -.75,0 ), N );
+
+fill((1.75,.25)--(1.75,-.25)--(3.25,-.25)--(3.25,.25),white);
+
+draw((-.25,.25)--(-.25,-.25)--(1.75,-.25)--(1.75,.25));
+
+label(""4"",( .75,0 ), S );
+
+fill((3.25,.25)--(3.25,-.25)--(4.75,-.25)--(4.75,.25),white);
+
+draw((1.75,.25)--(1.75,-.25)--(3.25,-.25)--(3.25,.25));
+
+label(""5"",( 2.5,0 ), NE );
+
+fill((4.75,.25)--(4.75,-.25)--(6.25,-.25)--(6.25,.25),white);
+
+draw((3.25,.25)--(3.25,-.25)--(4.75,-.25)--(4.75,.25));
+
+label(""6"",( 5.25,0 ), NW );
+
+[/asy] [asy]
+draw((0,0)--(8,0));
+fill((7,0.",1.0
+algebra,3,The sum of the first $n$ terms of an arithmetic sequence is given by $S_n = \frac{n}{2}(a_1 + a_n)$. What must be added to each term in the sequence so that the sum of any $k$ consecutive terms is zero?,"Let $d$ be the constant which we will add to every term of this arithmetic sequence. Then, our new sequence has common difference $(a_{i+1} - a_i) = d$, for all $i$. Thus, if we let $\tilde{a}_1$ denote the first term of this new sequence, then it follows that $$\begin{aligned}
+\tilde{a}_1 &= a_1 + d \\
+\tilde{a}_2 &= a_2 + d \\
+&= (a_1 + a_2)/2 + d \\
+&= a_1/2 + a_2/2 + d \\
+&= a_1 + d \\
+&= \tilde{a}_1.
+\end{aligned}$$This means that our new sequence has constant value $\tilde{a}_1$, so the sum of any number of consecutive terms in the new sequence equals $\tilde{a}_1 \cdot k$.
+
+We know that this quantity must equal zero for any positive integer $k$. Since $k$ can take on infinitely many values, this only occurs when $\tilde{a}_1 = 0$; thus, we have $a_1 + d = 0$ or $d = \boxed{-a_1}$. It's easy to see that adding $-a_1$ to every term gives us a valid solution. Also, since $d = -a_1$ works, there are no other possible solutions.",1.0
+counting_and_probability,1,"In how many ways can the letters of ""LOVELACE"" be arranged if the L's are indistinct?","There are $8$ letters, with two of them being identical. Thus there are $\frac{8!}{2}=\boxed{20160}$ possible arrangements.",1.0
+counting_and_probability,1,Compute $\dbinom{133}{133}$.,$\dbinom{133}{133}=\dbinom{133}{0}=\boxed{1}.$,0.0
+algebra,3,The sum of the first $n$ odd integers is $25$. What is $n$?,"Let's list out some sums of odd integers to see if we can spot a pattern:
+
+\begin{align*}
+1&=1\\
+1+3&=4\\
+1+3+5&=9\\
+1+3+5+7&=16\\
+1+3+5+7+9&=25
+\end{align*}We see that each time, we get perfect squares as the sums, so when the sum reaches 25, which is the fifth perfect square, there must be $\boxed{5}$ numbers in the list. Alternatively, since the sum of the first $n$ odd positive integers is given by the formula \[1+3+\dots+(2n-1)=n^2,\]we substitute for our value to get \[25=n^2.\]Taking the square root gives us either $n=-5$ or $n=\boxed{5}$.
+
+In general, it's easy to remember that the sum of the first $n$ odd integers is $n^2$, because of the following geometric interpretation:
+[asy]
+fill((0,0)--(1,-1)--(2,-1)--(2,-2)--cycle,gray(.7));
+draw((0,0)--(3,0)--(3,1)--(2,1)--(2,2)--(1,2)--(1,3)--(0,3)--cycle);
+label(""1"",(0.5, -0.5),SE);
+label(""3"", (2.5, -.5), SE);
+label(""5"", (1.5, .5), NE);
+label(""7"",(2.5,.5),NE);
+[/asy]
+
+Each layer of this figure adds an odd number of dots corresponding to how many layers deep you are. For example, the bottom layer has one dot, then two more layers with three and five dots respectively, etc. Since every layer is a square with side length equal to the depth of the layer, the total area of all these small squares equals the big outermost square. Thus, the number of dots in the entire figure is equal to $n^2$ where $n$ is the number of layers. This provides a simple way to calculate the sum of the first $n$ odd integers without having to add them up!",1.0
+algebra,1,Solve the equation $-4x - 2 = x + 8$.,"Adding $4x+2$ to both sides of the given equation, we have \begin{align*}
+0&=-5x+6\\
+\Rightarrow\qquad
+5x &=6.
+\end{align*} Then dividing both sides by 5 yields $\boxed{x=\frac{6}{5}}$. Checking our work, $$-4\left(\frac{6}{5}\right)-2= -\frac{36}{5}-2=-\frac{46}{5},$$and $$\frac{6}{5}+8=\frac{46}{5},$$so our solution is correct. The boxed expression represents the solution to the original equation. (Note that when we write a value inside a box, it does not necessarily mean that it will be an integer or a simple fraction.) We could also solve this problem using different methods such as factoring, completing the square, graphing, etc., but in this case, solving for $x$ directly gives us the answer without too much trouble. For more difficult equations, these other methods may prove helpful. Also note that if there were no solutions, we would state something like ""there are no values of $x$ which satisfy the given equation."" If instead, every number was a solution, we would say ""any real number"" is the solution. However, in most cases, only one specific value works as shown here. Our final step-by-step explanation is below:
+
+Adding $4x+2$ to both sides of the given equation, we have \[
+-4x - 2 + 4x + 2 = x + 8 + 4x + 2,
+\]which simplifies to \[
+0 = 5x + 10.
+\]Then subtracting $10$ from both sides of the equation, we obtain \[
+-10 = 5x.
+\]Finally, dividing both sides by $5$, we find that \[
+x = \boxed{\frac{6}{5}},
+\]is the solution to the given equation.   [asy]
+import olympiad; size(7cm); defaultpen(fontsize(10pt)+linewidth(.8));
+real f(real x) { return (-4)*x-2-x-8; }
+draw(graph(f,-3,1),Arrows);
+dot((-2,f(-2)));
+label(""$y=(-4)x-2$"",(-4,0),S);
+[/asy]
+
+[asy]
+import olympiad; size(7cm); defaultpen(fontsize(10pt)+linewidth(.8));
+real f(real x) { return (-4)*x-2-x-8; }
+draw((0,-12)--(0,12),EndArrow, BeginArrow);
+draw((-12,0)--(12,0), EndArrow, BeginArrow);
+for(int i = -9; i <= 9; ++i)
+{
+if(i >= 0) draw((i,.1)--(i,-.1));
+if(i < 0) draw((-.1,i)--(.1,i));
+}
+for(int i = -9; i <= 9; ++i)
+{
+label(string(abs(i)),(i,0),S);
+label(string(abs(i)),(0,i),E);
+}
+
+pair[] A = {(1,-10),(2,-12),(3,-14),(4,-16),(5,-18),(6,-20)};
+draw(A[0]--A[1], dashed);
+
+dot(""$(1,-10)$"",A[0]);
+dot(""$(2,-12)$"",A[1]);
+[/asy] In the first diagram above, the blue line corresponds to $y = -4x - 2$, and the red line corresponds to $y = x + 8$. Because the two lines intersect at $(\frac{6}{5},-\frac{46}{5})$, this point satisfies the equation $-4x - 2 = x + 8$. The second diagram shows the function $y = -5x + 6$ plotted on the same coordinate system. As you can see, the point where the graph intersects the $x$-axis is exactly $x = \frac{6}{5}$, which means that the equation $-5x + 6 = 0$ has a solution of $\frac{6}{5}$, confirming our previous result. Note that $x = \frac{6}{5}$ is equal to $1 \frac{1}{5}$, so if asked, we should give the answer in whichever form is preferred. In most cases, giving the fractional answer is acceptable because fractions are exact whereas decimals",1.0
+algebra,5,"If $x$ is positive and $\log_{10} x = -2$, what is the value of $x$?","We have that $\log_{10} x=-2$. In exponential form, this means that $10^{-2}=x$, or $\boxed{\frac{1}{100}}=x$. Note that we can also use the logarithm power rule to solve for $x$: \begin{align*}
+\log_{10} x&=-2\\
+\Rightarrow \quad 10^{\log_{10} x}&=10^{-2}\\
+\Rightarrow \quad x&=\boxed{\frac{1}{100}}
+\end{align*}In general, if $\log_b x=a$, then $b^a=x$. This property is very useful in solving many problems involving logarithms. For example, it would be much harder to solve the problem above without using this property. Therefore, whenever you see an equation like $\log_b y=c$, try converting it into its equivalent exponential form by raising $b$ to the power of both sides of the equation. (This works only when dealing with equations in which there is no sum or difference inside the log function.)",1.0
+algebra,5,Evaluate $\cfrac{\left\lceil\cfrac{17}{7}-\left\lceil\cfrac{27}{17}\right\rceil\right\rceil}{\left\lceil\cfrac{27}{7}+\left\lceil\cfrac{7\cdot17}{27}\right\rceil\right\rceil}$,"The first thing to be addressed is the fractions under the inner sets of ceiling functions. The smallest integer greater than $\frac{27}{17}$ is $2$. The smallest integer greater than $\frac{7\cdot17}{27}$, which is equal to $\frac{119}{27}$ is $5$. Therefore, the original problem can be rewritten as: \[\frac{\left\lceil\frac{17}{7}-2\right\rceil}{\left\lceil\frac{27}{7}+5\right\rceil}=\frac{\left\lceil\frac{3}{7}\right\rceil}{\left\lceil\frac{62}{7}\right\rceil}\] The smallest integer greater than $\frac{3}{7}$ is $1$ and the smallest integer greater than $\frac{62}{7}$ is $9$. Hence, the final simplified fraction is $\boxed{\frac{1}{9}}$.",0.0
+algebra,1,What is the coefficient of $x^2$ in $(3x+5)(4x-8)$?,"The product of two binomials can be expanded by using the distributive property (also known as the FOIL method): \begin{align*}
+(3x + 5)(4x - 8) &= 3x\cdot 4x + 3x(-8) + 5(4x) + 5(-8)\\
+&= 12x^{2} - 24x + 20x - 40.
+\end{align*}Combining like terms, we get $\boxed{12x^2 - 4x - 40}$.
+
+We see that the coefficient of $x^2$ is $\boxed{12}$. This could have been determined without expanding the expression by recognizing that only the products of the coefficients on the first term of each factor would contribute to the coefficient of $x^2$. In general, if you have an expression of the form $(ax+b)(cx+d)$, then the coefficient of $x^2$ will always be the product of the coefficients of $x$, namely $ac$. This shortcut works for any number of variables or exponents. Note however that this shortcut does not work when dealing with the other terms of the expansion because they involve more complex operations such as addition and subtraction. For example, the coefficient of the linear term in the above problem was obtained by combining the products of the constant terms on one factor and the variable terms on the other factor. If either factor had contained more than two terms, things would get even more complicated. So unfortunately there are no shortcuts for those cases. However, since our goal was simply to find the coefficient of the quadratic term, this particular shortcut worked out nicely.",1.0
+algebra,5,Find the domain of the function $\frac{x^4-4x^3+6x^2-4x+1}{x^2-4}$.,"Because we cannot divide by zero, values of $x$ that make the denominator of the fraction equal to zero must be excluded from the domain. Thus, we must first find all values of $x$ that satisfy the equation $x^2-4=0$. Since this factors as $(x+2)(x-2)=0$, the only two values we need to exclude from the domain are $2$ and $-2$. This gives us the solution $x\in\boxed{(-\infty,-2)\cup(-2, 2)\cup(2,\infty)}$.",0.0
+counting_and_probability,3,A diagonal of a polygon is a segment joining two nonconsecutive vertices of the polygon. How many diagonals does a regular octagon have?,"An $n$-gon has $n(n-3)/2$ diagonals.  To see this, subtract the $n$ consecutive pairs of vertices from the $\binom{n}{2}$ pairs of vertices:  \begin{align*}
+\binom{n}{2}-n&=\frac{n(n-1)}{2}-n \\
+&=\frac{n^2-n}{2}-\frac{2n}{2} \\
+&=\frac{n^2-n-2n}{2} \\
+&=\frac{n^2-3n}{2} \\
+&=\frac{n(n-3)}{2}.
+\end{align*} An octagon has $8(8-3)/2=\boxed{20}$ diagonals.",0.0
+counting_and_probability,1,How many ways can the letters of the word ``PRIMES'' be arranged if all the vowels must come first?,"The vowels in the word are I and E, so we know that these two letters will occupy the first two spots. There are $\binom{4}{2} = \boxed{6}$ different arrangements for this to occur. After placing these two letters in their respective positions, there are $3!$ permutations of P, R and S which gives us a total of $6\cdot 6= \boxed{36}$ possible arrangements.   [asy]
+draw((0,-1)--(7,5));
+draw((-3,-1)--(-8,5),dashed);
+label(""P"", (2,.5));
+label(""R"", (4,.5));
+label(""I"", (-1,.5));
+label(""M"", (0,.5));
+label(""E"", (1,.5));
+label(""S"", (3,.5));
+
+[/asy] We could have also determined that since there are 4 consonants, any arrangement would require the first position to contain one of them with probability $\frac{1}{4}$, the second position containing another one with probability $\frac{1}{3}$, etc. So our answer is $6-\left(\frac{3}{4}\right)\left(\frac{2}{3}\right)\left(\frac{1}{2}\right) = \boxed{36}$.",1.0
